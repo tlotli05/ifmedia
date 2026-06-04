@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="I.F Media – Strategic advertising for the modern era. Precision campaigns, measurable growth.">
+    <title>I.F Media | Strategic Advertising</title>
+    
+    <!-- Fonts: refined, elegant -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #030303;
+            font-family: 'Inter', sans-serif;
+            color: #ECECEC;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Premium animated gradient background — black dominates with gold undertones */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 30%, rgba(30,20,10,0.4) 0%, #030303 70%),
+                        radial-gradient(ellipse at 80% 70%, rgba(201,166,107,0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Dynamic gold gradient orbs that shift */
+        .gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+            animation: floatGlow 20s ease-in-out infinite alternate;
+        }
+        .orb-gold-1 {
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(201,166,107,0.15) 0%, rgba(5,5,5,0) 80%);
+            top: -20vh;
+            left: -10vw;
+            animation-delay: 0s;
+        }
+        .orb-gold-2 {
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(180,140,70,0.1) 0%, rgba(5,5,5,0) 80%);
+            bottom: -30vh;
+            right: -15vw;
+            animation-delay: 5s;
+        }
+        .orb-dark {
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(20,15,10,0.6) 0%, #030303 90%);
+            top: 30vh;
+            left: 20vw;
+            filter: blur(120px);
+            animation-delay: 2s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            100% { transform: translate(5%, 5%) scale(1.2); opacity: 0.5; }
+        }
+
+        /* subtle grain texture */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            animation: grainShift 12s steps(12) infinite;
+        }
+
+        @keyframes grainShift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(0.5%, 0.3%); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C9A66B;
+            border-radius: 3px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1100;
+            padding: 28px 48px;
+            background: transparent;
+            transition: all 0.4s ease;
+        }
+        .nav-container.scrolled {
+            background: rgba(3,3,3,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201,166,107,0.2);
+            padding: 18px 48px;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 0.7rem;
+            letter-spacing: 10px;
+            font-weight: 500;
+            color: #EAEAEA;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        /* hamburger menu */
+        .menu-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(10,10,10,0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(201,166,107,0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+            z-index: 2100;
+        }
+        .menu-btn:hover {
+            border-color: #C9A66B;
+            background: rgba(30,30,30,0.7);
+        }
+        .menu-btn i {
+            font-size: 1.2rem;
+            color: #EAEAEA;
+            transition: all 0.3s;
+        }
+
+        /* side panel */
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100vh;
+            background: rgba(5,5,5,0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(201,166,107,0.25);
+            z-index: 2000;
+            transition: right 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem 2rem;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.6);
+        }
+        .side-panel.active {
+            right: 0;
+        }
+        .panel-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        .panel-menu li {
+            margin: 1.8rem 0;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease;
+        }
+        .side-panel.active .panel-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .side-panel.active .panel-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .side-panel.active .panel-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .side-panel.active .panel-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .side-panel.active .panel-menu li:nth-child(4) { transition-delay: 0.4s; }
+        .side-panel.active .panel-menu li:nth-child(5) { transition-delay: 0.5s; }
+        
+        .panel-menu li a {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #EAEAEA;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .panel-menu li a:hover {
+            color: #C9A66B;
+            transform: translateX(5px);
+            letter-spacing: 4px;
+        }
+        .panel-header {
+            border-bottom: 1px solid rgba(201,166,107,0.2);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .panel-header span {
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            color: #9D9D9D;
+        }
+        .panel-close {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #C9A66B;
+            transition: opacity 0.3s;
+        }
+        .panel-close:hover {
+            opacity: 0.7;
+        }
+
+        /* hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+            z-index: 3;
+        }
+        .hero-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
+            margin-bottom: 1.2rem;
+        }
+        .attribution {
+            color: #C9A66B;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+        .divider-luxury {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C9A66B, #C9A66B, transparent);
+            margin: 1.2rem auto;
+            animation: shimmerPulse 2s infinite;
+        }
+        @keyframes shimmerPulse {
+            0%, 100% { opacity: 0.5; width: 60px; }
+            50% { opacity: 1; width: 90px; }
+        }
+        .brand-mark {
+            font-size: 0.7rem;
+            letter-spacing: 10px;
+            font-weight: 600;
+            color: #EAEAEA;
+            text-transform: uppercase;
+            margin: 0.6rem 0;
+            opacity: 0.8;
+        }
+        .btn-prime {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(201,166,107,0.6);
+            padding: 0.7rem 2.2rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: #EAEAEA;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            margin-top: 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+        }
+        .btn-prime:hover {
+            background: #C9A66B;
+            color: #020202;
+            border-color: #C9A66B;
+            box-shadow: 0 0 28px rgba(201,166,107,0.3);
+            transform: translateY(-3px);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.5;
+            cursor: pointer;
+            z-index: 5;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 45px;
+            background: linear-gradient(180deg, #C9A66B, transparent);
+        }
+
+        section {
+            position: relative;
+            z-index: 2;
+            padding: 100px 0;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            letter-spacing: -0.3px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .body-text {
+            color: #B0B0B0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* premium cards */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3.5rem 0 1rem;
+        }
+        .price-card {
+            background: rgba(8,8,8,0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 32px;
+            padding: 2rem;
+            width: 300px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: left;
+        }
+        .price-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201,166,107,0.5);
+            box-shadow: 0 25px 40px -20px rgba(0,0,0,0.8);
+            background: rgba(15,15,15,0.9);
+        }
+        .featured-card {
+            border: 1px solid rgba(201,166,107,0.4);
+            background: linear-gradient(145deg, #111111 0%, #080808 100%);
+            position: relative;
+        }
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C9A66B, #C9A66B, transparent);
+        }
+        .card-icon {
+            color: #C9A66B;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            display: block;
+            opacity: 0.9;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            margin-bottom: 0.3rem;
+        }
+        .price {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #C9A66B;
+            margin: 0.8rem 0 1rem;
+        }
+        .price span {
+            font-size: 0.6rem;
+            color: #9D9D9D;
+            font-weight: 400;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 1.2rem 0 1.5rem;
+        }
+        .feature-list li {
+            margin: 0.65rem 0;
+            font-size: 0.7rem;
+            color: #CCCCCC;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature-list li i {
+            color: #C9A66B;
+            font-size: 0.65rem;
+            width: 18px;
+        }
+        .card-btn {
+            background: transparent;
+            border: 1px solid rgba(201,166,107,0.4);
+            width: 100%;
+            padding: 0.65rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #EAEAEA;
+            transition: all 0.25s;
+            cursor: pointer;
+            border-radius: 40px;
+            margin-top: 0.5rem;
+        }
+        .card-btn:hover {
+            background: #C9A66B;
+            color: #050505;
+            border-color: #C9A66B;
+        }
+        .badge {
+            background: rgba(201,166,107,0.12);
+            color: #C9A66B;
+            font-size: 0.55rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* stats */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            margin: 2.5rem 0 3rem;
+        }
+        .stat-item {
+            text-align: center;
+            min-width: 160px;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #C9A66B;
+            letter-spacing: -1px;
+            margin-bottom: 0.4rem;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            color: #9D9D9D;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .icon-card {
+            background: rgba(8,8,8,0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 24px;
+            padding: 1.2rem 1.5rem;
+            min-width: 140px;
+            text-align: center;
+            transition: all 0.25s;
+        }
+        .icon-card:hover {
+            border-color: rgba(201,166,107,0.3);
+            transform: translateY(-3px);
+        }
+        .icon-card i {
+            font-size: 1.5rem;
+            color: #C9A66B;
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+        .icon-card span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #CCCCCC;
+        }
+
+        /* contact */
+        .contact-stack {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .contact-details-vertical {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(8,8,8,0.5);
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(4px);
+        }
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-item i {
+            color: #C9A66B;
+            font-size: 1rem;
+        }
+        .contact-item p, .contact-item a {
+            font-size: 0.85rem;
+            color: #EAEAEA;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+        .contact-item a:hover {
+            color: #C9A66B;
+        }
+        .glass-form {
+            background: rgba(8,8,8,0.6);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 0.85rem 1.2rem;
+            color: #EAEAEA;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #C9A66B;
+            background: rgba(0,0,0,0.7);
+        }
+        .submit-btn {
+            background: #C9A66B;
+            border: none;
+            width: 100%;
+            padding: 0.85rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #020202;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .submit-btn:hover {
+            background: #dbb67b;
+            transform: scale(0.98);
+        }
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 2.5rem 0 2rem;
+            text-align: center;
+        }
+        .footer-credit {
+            font-size: 0.6rem;
+            color: #6A6A6A;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 24px; }
+            .nav-container { padding: 20px 24px; }
+            .side-panel { width: 300px; right: -300px; }
+            .contact-row { flex-direction: column; align-items: center; gap: 1rem; }
+            .price-card { width: 100%; max-width: 320px; }
+            section { padding: 70px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="grain-overlay"></div>
+<div class="gradient-orb orb-gold-1"></div>
+<div class="gradient-orb orb-gold-2"></div>
+<div class="gradient-orb orb-dark"></div>
+
+<!-- Navigation -->
+<div class="nav-container" id="navContainer">
+    <div class="nav-inner">
+        <div class="logo">I.F MEDIA</div>
+        <div class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Side Panel Menu — Simple, Clear Labels -->
+<div class="side-panel" id="sidePanel">
+    <div class="panel-close" id="panelClose">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="panel-header">
+        <span>MENU</span>
+    </div>
+    <ul class="panel-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+    </ul>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-inner" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-quote">
+            "Opportunity often comes disguised<br>as misfortune or temporary defeat"
+        </div>
+        <div class="attribution">— Napoleon Hill</div>
+        <div class="divider-luxury"></div>
+        <div class="brand-mark">I.F MEDIA</div>
+        <div class="divider-luxury" style="animation-delay: 0.5s;"></div>
+        <div style="font-size: 0.7rem; letter-spacing: 2.5px; color: #9D9D9D; margin-top: 0.5rem;">Strategic Advertising. Measured Growth.</div>
+        <a href="#about" class="btn-prime" id="discoverBtn">Discover More</a>
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-line"></div>
+        <span style="font-size: 8px; letter-spacing: 3px;">DESCEND</span>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" style="background: transparent;">
+    <div class="container">
+        <div data-aos="fade-up">
+            <h2 class="section-title">THE WORLD CHANGED.<br><span style="color: #C9A66B;">HAS YOUR MARKETING?</span></h2>
+            <p class="body-text" style="margin-top: 1.5rem;">From horse-drawn carriages to autonomous fleets. From postal letters to instant global connection.</p>
+            <p class="body-text" style="margin-top: 1rem;">Technology evolves exponentially. Buyer psychology shifts faster. Outdated methods become liabilities.</p>
+            <p class="body-text" style="margin-top: 1rem;">We engineer precision advertising systems that decode modern attention, convert intent into capital, and scale with confidence.</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#services" class="btn-prime">View Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" style="background: rgba(5,5,5,0.4);">
+    <div class="container">
+        <div data-aos="fade-up" style="text-align: center;">
+            <h2 class="section-title">PREMIUM <span style="color: #C9A66B;">SOLUTIONS</span></h2>
+            <p class="body-text" style="font-size: 0.7rem; margin-top: 0.25rem;">Tailored advertising frameworks for modern brands</p>
+        </div>
+        <div class="card-grid">
+            <div class="price-card" data-aos="fade-up" data-aos-delay="80">
+                <i class="fas fa-seedling card-icon"></i>
+                <div class="card-title">STARTER</div>
+                <div class="price">R5,000 – R8,000 <span>+ Ad Spend</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-pen-fancy"></i> Creative guidance</li>
+                    <li><i class="fas fa-chart-line"></i> 1 high-converting campaign</li>
+                    <li><i class="fas fa-users"></i> Core audience setup</li>
+                    <li><i class="fas fa-sync-alt"></i> 1 optimization cycle</li>
+                </ul>
+                <button class="card-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+            </div>
+            <div class="price-card featured-card" data-aos="fade-up" data-aos-delay="160">
+                <div class="badge">MOST POPULAR</div>
+                <i class="fas fa-crown card-icon"></i>
+                <div class="card-title">PRO</div>
+                <div class="price">R12,000 – R25,000 <span>+ Ad Spend</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-rocket"></i> 2 active campaigns</li>
+                    <li><i class="fas fa-layer-group"></i> Custom audience stacking</li>
+                    <li><i class="fas fa-chart-pie"></i> Creative optimization</li>
+                    <li><i class="fas fa-calendar-week"></i> Weekly performance reviews</li>
+                    <li><i class="fas fa-chart-simple"></i> ROAS & CPL analytics</li>
+                </ul>
+                <button class="card-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Select Pro</button>
+            </div>
+            <div class="price-card" data-aos="fade-up" data-aos-delay="240">
+                <i class="fas fa-infinity card-icon"></i>
+                <div class="card-title">PREMIUM</div>
+                <div class="price">R30,000+ <span>+ Ad Spend</span></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-crown"></i> Everything in Pro</li>
+                    <li><i class="fas fa-chart-line"></i> 3–5 concurrent campaigns</li>
+                    <li><i class="fas fa-flask"></i> Advanced A/B testing</li>
+                    <li><i class="fas fa-phone-alt"></i> Bi-weekly strategy calls</li>
+                    <li><i class="fas fa-user-tie"></i> Dedicated ads manager</li>
+                </ul>
+                <button class="card-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Scale My Business</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results Section -->
+<section id="results" style="background: transparent;">
+    <div class="container">
+        <div data-aos="fade-up">
+            <h2 class="section-title">RESULTS OVER <span style="color: #C9A66B;">ASSUMPTIONS</span></h2>
+        </div>
+        <div class="stats-row">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="60">
+                <div class="stat-number"><span class="counter" data-target="187">0</span>%+</div>
+                <div class="stat-label">AVG. ROAS INCREASE</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="120">
+                <div class="stat-number"><span class="counter" data-target="94">0</span>%</div>
+                <div class="stat-label">CLIENT RETENTION</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="180">
+                <div class="stat-number"><span class="counter" data-target="3.2">0</span>x</div>
+                <div class="stat-label">SCALE MULTIPLIER</div>
+            </div>
+        </div>
+        <div class="icon-grid">
+            <div class="icon-card" data-aos="fade-up"><i class="fas fa-bullseye"></i><span>Strategic Precision</span></div>
+            <div class="icon-card" data-aos="fade-up" data-aos-delay="40"><i class="fas fa-chart-line"></i><span>Audience Intelligence</span></div>
+            <div class="icon-card" data-aos="fade-up" data-aos-delay="80"><i class="fas fa-chart-simple"></i><span>Conversion Engineering</span></div>
+            <div class="icon-card" data-aos="fade-up" data-aos-delay="120"><i class="fas fa-expand-alt"></i><span>Growth Systems</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" style="background: rgba(5,5,5,0.3);">
+    <div class="container">
+        <div data-aos="fade-up" style="text-align: center;">
+            <h2 class="section-title">LET'S <span style="color: #C9A66B;">CONNECT</span></h2>
+            <p class="body-text" style="font-size: 0.75rem;">Ready to elevate your brand? Let's talk.</p>
+        </div>
+        <div class="contact-stack">
+            <div class="contact-details-vertical" data-aos="fade-up">
+                <div class="contact-row">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>081 509 6879</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@ifmedia.co.za">info@ifmedia.co.za</a>
+                    </div>
+                </div>
+                <div class="divider-luxury" style="width: 40px; margin: 1.2rem auto;"></div>
+                <p style="font-size: 0.65rem; font-style: italic; color: #9D9D9D;">Precision. Performance. Prestige.</p>
+            </div>
+            
+            <div class="glass-form" data-aos="fade-up" data-aos-delay="100">
+                <form id="luxuryForm">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="businessName" placeholder="Business name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder="Phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="budget">
+                            <option value="">Select investment range</option>
+                            <option>R5,000 – R10,000</option>
+                            <option>R10,000 – R25,000</option>
+                            <option>R25,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="2" id="message" placeholder="Tell us about your goals..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Enquiry</button>
+                    <div id="formFeedback" style="margin-top: 0.8rem; font-size: 0.7rem; text-align: center;"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div style="font-size: 0.7rem; letter-spacing: 6px; margin-bottom: 0.5rem;">I.F MEDIA</div>
+        <p style="color:#9D9D9D; font-size: 0.65rem;">Strategic advertising for the modern era.</p>
+        <div class="footer-credit">designed by Monarch Technologies (Pty) Ltd.</div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: false, offset: 60, easing: 'ease-out' });
+    
+    // Nav scroll
+    const navContainer = document.getElementById('navContainer');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navContainer.classList.add('scrolled');
+        else navContainer.classList.remove('scrolled');
+    });
+    
+    // Side panel
+    const menuBtn = document.getElementById('menuBtn');
+    const sidePanel = document.getElementById('sidePanel');
+    const panelClose = document.getElementById('panelClose');
+    const menuIcon = document.getElementById('menuIcon');
+    
+    function openPanel() {
+        sidePanel.classList.add('active');
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-times');
+    }
+    
+    function closePanel() {
+        sidePanel.classList.remove('active');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+    }
+    
+    menuBtn.addEventListener('click', openPanel);
+    panelClose.addEventListener('click', closePanel);
+    
+    document.querySelectorAll('.panel-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+            closePanel();
+        });
+    });
+    
+    // Smooth scroll
+    document.getElementById('discoverBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById('scrollIndicator')?.addEventListener('click', () => {
+        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Counters
+    const counters = document.querySelectorAll('.counter');
+    let counted = false;
+    const startCounters = () => {
+        counters.forEach(counter => {
+            const target = parseFloat(counter.getAttribute('data-target'));
+            const isFloat = target % 1 !== 0;
+            const update = () => {
+                let current = parseFloat(counter.innerText);
+                let inc = target / 50;
+                if (current < target) {
+                    let next = Math.min(current + inc, target);
+                    counter.innerText = isFloat ? next.toFixed(1) : Math.floor(next);
+                    setTimeout(update, 20);
+                } else {
+                    counter.innerText = isFloat ? target.toFixed(1) : target;
+                }
+            };
+            update();
+        });
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !counted) {
+                counted = true;
+                startCounters();
+            }
+        });
+    }, { threshold: 0.3 });
+    const resultsSection = document.getElementById('results');
+    if (resultsSection) observer.observe(resultsSection);
+    
+    // Form
+    const form = document.getElementById('luxuryForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('fullName').value.trim();
+        const biz = document.getElementById('businessName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const budget = document.getElementById('budget').value;
+        if(!name || !biz || !email || !phone || !budget) {
+            feedbackDiv.innerHTML = '<span style="color:#C9A66B;">● Please complete all fields</span>';
+            return;
+        }
+        if(!email.includes('@') || !email.includes('.')) {
+            feedbackDiv.innerHTML = '<span style="color:#C9A66B;">● Valid email required</span>';
+            return;
+        }
+        feedbackDiv.innerHTML = '<span style="color:#C9A66B;">✓ Enquiry received. A strategist will respond within 24h.</span>';
+        form.reset();
+        setTimeout(() => feedbackDiv.innerHTML = '', 4500);
+    });
+</script>
+</body>
+</html>
